@@ -1,9 +1,6 @@
 package com.example.reto5.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import net.bytebuddy.dynamic.loading.InjectionClassLoader;
-import org.apache.catalina.LifecycleState;
-import org.springframework.boot.autoconfigure.web.WebProperties;
 
 import javax.persistence.*;
 import java.io.Serializable;

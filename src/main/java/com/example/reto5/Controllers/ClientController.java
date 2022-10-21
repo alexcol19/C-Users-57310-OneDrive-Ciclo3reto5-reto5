@@ -19,13 +19,13 @@ public class ClientController {
         private ClientService clientService;
 
         @GetMapping("/all")
-        public List<Client> all(){
+        public List<Client> getAll(){
             return clientService.getAll();
         }
 
         @GetMapping("/{id}")
         public Optional<Client> getClient(@PathVariable("id") int id){
-            return clientService.getClient(id);
+            return clientService.getIdClient(id);
         }
 
         @PostMapping("/save")

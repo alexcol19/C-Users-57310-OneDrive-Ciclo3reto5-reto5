@@ -2,6 +2,7 @@ package com.example.reto5.Repository;
 
 import com.example.reto5.Repository.CrudRepository.ReservationCrudRepository;
 import com.example.reto5.entities.Client;
+import com.example.reto5.entities.DTOs.CountClient;
 import com.example.reto5.entities.DTOs.TotalAndClient;
 import com.example.reto5.entities.Reservation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,16 +18,16 @@ public class ReservationRepository {
     @Autowired
     private ReservationCrudRepository reservationsCrudRepository;
 
-    public List<Reservation> getReservations(){
+    public List<Reservation> getAll(){
         return (List<Reservation>) reservationsCrudRepository.findAll();
     }
     public Optional<Reservation> getReservationId(int id){
         return reservationsCrudRepository.findById(id);
     }
-    public Reservation saveReservation(Reservation reservation){
+    public Reservation save(Reservation reservation){
         return reservationsCrudRepository.save(reservation);
     }
-    public void deleteReservation(Reservation reservation){
+    public void delete(Reservation reservation){
         reservationsCrudRepository.delete(reservation);
     }
 
@@ -41,14 +42,15 @@ public class ReservationRepository {
         return reservationsCrudRepository.findAllByStatus(status);
     }
 
-    public List<TotalAndClient> getTopClients() {
-        List<TotalAndClient> respuesta = new ArrayList<>();
-        List<Object[]> reporte = reservationsCrudRepository.getTotalReservationByClient();
-        for(int i=0; i<reporte.size(); i++){
-            respuesta.add(new TotalAndClient( (Long) reporte.get(i)[1], (Client) reporte.get(i)[0]));
+    public List<CountClient> getTopClients() {
+        List<CountClient> respuesta = new ArrayList<>();
+        List<Object[]> reporte = reservationsCrudRepository.countTotalReservationByClient();
+        for(int i = 0; i<reporte.size(); i++){
+            respuesta.add(new CountClient( (Long) reporte.get(i)[1], (Client) reporte.get(i)[0]));
 
         }
         return respuesta;
 
     }
+
 }

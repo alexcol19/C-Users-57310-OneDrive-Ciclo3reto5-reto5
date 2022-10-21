@@ -13,15 +13,15 @@ public class CategoryService {
     @Autowired
     private CategoryRepository categoryRepository;
 
-    public List<Category> getCategory() {
+    public List<Category> getAll() {
         return categoryRepository.getAll();
     }
 
-    public Optional<Category> getCategoryId(int id) {
+    public Optional<Category> getId(int id) {
         return categoryRepository.getCategory(id);
     }
 
-    public Category saveCostume(Category category) {
+    public Category save(Category category) {
         if (category.getId() == null) {
             return categoryRepository.save(category);
         } else {
@@ -48,7 +48,7 @@ public class CategoryService {
         return category;
     }
     public boolean deleteCategory(int id){
-        Boolean r = getCategoryId(id).map(category ->{
+        Boolean r = getId(id).map(category ->{
             categoryRepository.delete(category);
             return true;
         }).orElse(false);

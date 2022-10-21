@@ -18,18 +18,18 @@ public class CategoryController {
     private CategoryService categoryService;
     @GetMapping("/all")
     public List<Category> getCategory(){
-        return categoryService.getCategory(); //getAll//
+        return categoryService.getAll(); //getAll//
     }
 
     @GetMapping("/{id}")
     public Optional<Category> getCategory(@PathVariable("id") int id){
-        return categoryService.getCategoryId(id); //getCategory//
+        return categoryService.getId(id); //getCategory//
     }
 
     @PostMapping("/save")
     @ResponseStatus(HttpStatus.CREATED)
     public Category saveCategory(@RequestBody Category category){
-        return categoryService.saveCostume(category); //save//
+        return categoryService.save(category); //save//
     }
 
     @PutMapping("/update")

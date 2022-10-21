@@ -87,9 +87,9 @@ public class Reservation {
         this.score = score;
     }
 
-    public Date getEndate() {return devolutionDate;
+    public Date getEndDate() {return devolutionDate;
     }
 
-    public void setEndDate(Date endate) {this.devolutionDate = endate;
+    public void setEndDate(Date endDate) {this.devolutionDate = endDate;
     }
 }

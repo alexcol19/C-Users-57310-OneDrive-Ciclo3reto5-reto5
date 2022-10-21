@@ -17,29 +17,29 @@ public class CostumeController {
     @Autowired
     private CostumeService costumeService;
 
-    @RequestMapping("/all")
-    public List<Costume> getCostume() {
-        return costumeService.getCostume();
+    @GetMapping("/all")
+    public List<Costume> getAll() {
+        return costumeService.getAll();
     }
 
     @GetMapping("/{id}")
-    public Optional<Costume> getCostumeId(@PathVariable("id") int id) {
+    public Optional<Costume> getCostume(@PathVariable("id") int id) {
 
-        return costumeService.getCostumeId(id);
+        return costumeService.getCostume(id);
     }
 
     @PostMapping("/save")
     @ResponseStatus(HttpStatus.CREATED)
-    public Costume saveCostume(@RequestBody Costume costume) {
+    public Costume save(@RequestBody Costume costume) {
 
-        return costumeService.saveCostume(costume);
+        return costumeService.save(costume);
     }
 
     @PutMapping("/update")
     @ResponseStatus(HttpStatus.CREATED)
     public Costume update(@RequestBody Costume costume) {
 
-        return costumeService.saveCostume(costume);
+        return costumeService.update(costume);
 
     }
 
@@ -48,7 +48,5 @@ public class CostumeController {
     public boolean delete ( @PathVariable("id") int id){
         return costumeService.deleteCostume(id);
     }
-
-
 
 }

@@ -14,16 +14,18 @@ public class CostumeRepository {
     private CostumeCrudRepository costumeCrudRepository;
 
 
-    public List<Costume> getCostumes(){
+    public List<Costume> getAll(){
         return (List<Costume>) costumeCrudRepository.findAll();
     }
     public Optional<Costume> getCostumeId(int id){
         return costumeCrudRepository.findById(id);
     }
-    public Costume saveCostume(Costume costume){
+    public Costume save(Costume costume){
         return costumeCrudRepository.save(costume);
     }
-    public void deleteCostume(Costume costume){
+    public void delete(Costume costume){
         costumeCrudRepository.delete(costume);
     }
+
+
 }

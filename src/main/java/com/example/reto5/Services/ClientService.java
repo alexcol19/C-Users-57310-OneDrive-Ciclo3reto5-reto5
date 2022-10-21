@@ -16,7 +16,7 @@ public class ClientService {
     public List<Client> getAll(){
         return clientRepository.getAll();
     }
-    public Optional<Client> getClient(int id){
+    public Optional<Client> getIdClient(int id){
         return clientRepository.getClientId(id);
     }
     public Client saveClient(Client client){
@@ -55,10 +55,12 @@ public class ClientService {
     }
 
     public boolean deleteClient(int id){
-        Boolean d = getClient(id).map(client -> {
+        Boolean r = getIdClient(id).map(client -> {
             clientRepository.deleteClient(client);
             return true;
         }).orElse(false);
-        return d;
+        return r;
     }
+
+
 }

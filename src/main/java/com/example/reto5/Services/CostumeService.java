@@ -13,17 +13,18 @@ public class CostumeService {
     @Autowired
     private CostumeRepository costumeRepository;
 
-    public List<Costume> getCostume(){return (List<Costume>) costumeRepository.getCostumes();}
-    public Optional<Costume> getCostumeId(int id){
+    public List<Costume> getAll(){return (List<Costume>) costumeRepository.getAll();}
+
+    public Optional<Costume> getCostume(int id){
         return costumeRepository.getCostumeId(id);
     }
-    public Costume saveCostume(Costume costume){
+    public Costume save(Costume costume){
         if(costume.getId()==null){
-            return costumeRepository.saveCostume(costume);
+            return costumeRepository.save(costume);
         }else{
             Optional<Costume> paux= costumeRepository.getCostumeId(costume.getId());
             if(paux.isEmpty()){
-                return costumeRepository.saveCostume(costume);
+                return costumeRepository.save(costume);
             }else
                 return costume;
         }
@@ -38,8 +39,8 @@ public class CostumeService {
                 if (costume.getBrand() != null) {
                     e.get().setBrand(costume.getBrand());
                 }
-                if (costume.getYear() != null) {
-                    e.get().setYear(costume.getYear());
+                if (costume.getYears() != null) {
+                    e.get().setYear(costume.getYears());
                 }
                 if (costume.getDescription() != null) {
                     e.get().setDescription(costume.getDescription());
@@ -47,7 +48,13 @@ public class CostumeService {
                 if (costume.getCategory() != null) {
                     e.get().setCategory(costume.getCategory());
                 }
-                costumeRepository.saveCostume(e.get()); //ojo//
+                if (costume.getReservations() != null) {
+                    e.get().setReservations(costume.getReservations());
+                }
+                if (costume.getMessages() != null) {
+                    e.get().setMessages(costume.getMessages());
+                }
+                costumeRepository.save(e.get()); //ojo//
                 return e.get();
             }else{
                 return costume;
@@ -57,11 +64,13 @@ public class CostumeService {
         }
     }
     public boolean deleteCostume(int id){
-        Boolean d = getCostumeId(id).map(costume -> {
-            costumeRepository.deleteCostume(costume);
+        Boolean r = getCostume(id).map(costume -> {
+            costumeRepository.delete(costume);
             return true;
         }).orElse(false);
-        return d;
+        return r;
 
     }
+
+
 }
